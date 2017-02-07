@@ -7,5 +7,9 @@
  * @since 2017/02/06
  */
 public interface IEulerProblem {
+	String GetName();
+	int GetLastExecutionSteps();
+	String GetLastExecutionRuntime();
 	int Solve();
+	
 }
