@@ -1,6 +1,8 @@
+package EulerProblems;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.concurrent.*;
+
 import javafx.beans.property.ReadOnlyBooleanProperty;
 
 import java.math.*;
@@ -15,30 +17,33 @@ import java.math.*;
  * @version 1.0
  * @since 2017/02/06
  */
-public class ProblemOne implements IEulerProblem {
+public class ProblemOne implements EulerProblem {
 	private int _limit;
 	private ArrayList<Integer> _factorsList;
 	private int _lastExecutionSteps;
 	private String _lastExecutionRuntime;
 	
-	public String GetName() {
+	public String getName() {
 		return "Problem One - factor sums";
 	}
 	
-	public int GetLastExecutionSteps() {
+	public int getLastExecutionSteps() {
 		return _lastExecutionSteps;
 	}
 	
-	public String GetLastExecutionRuntime() {
+	public String getLastExecutionRuntime() {
 		return _lastExecutionRuntime;
 	}
 	
-	private void SetLastExecutionRuntime(long millis) {
-		_lastExecutionRuntime = String.format("%02d min, %02d sec", 
-			    TimeUnit.MILLISECONDS.toMinutes(millis),
-			    TimeUnit.MILLISECONDS.toSeconds(millis) - 
-			    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis))
-			);
+	private void setLastExecutionRuntime(long millis) {
+		long min = TimeUnit.MILLISECONDS.toMinutes(millis);
+		long sec = TimeUnit.MILLISECONDS.toSeconds(millis) - 
+			    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis));
+		
+		long ms = millis - TimeUnit.MINUTES.toMillis(min) - TimeUnit.SECONDS.toMillis(sec);
+		
+		_lastExecutionRuntime = String.format("%02d min, %02d sec, %02d ms", 
+			    min, sec, ms);
 	}
 	
 	/**
@@ -70,7 +75,7 @@ public class ProblemOne implements IEulerProblem {
 	 * Returns the integer sum of all the factors below
 	 * the limit value.
 	 */
-	public int Solve() {
+	public int solve() {
 		_lastExecutionSteps = 0;
 
 		 long startTime = System.currentTimeMillis();
@@ -82,13 +87,13 @@ public class ProblemOne implements IEulerProblem {
 			int maxCount = (_limit - 1) / factor;
 			_lastExecutionSteps++;
 
-			int multiplier = RangeSumInclusive(1, maxCount);
+			int multiplier = rangeSumInclusive(1, maxCount);
 			result += (multiplier * factor);
 			_lastExecutionSteps++;
 		}
 		
 		 long endTime = System.currentTimeMillis();
-		 SetLastExecutionRuntime(endTime - startTime);
+		 setLastExecutionRuntime(endTime - startTime);
 		return result;
 	}
 	
@@ -99,7 +104,7 @@ public class ProblemOne implements IEulerProblem {
 	 * @param max The max value to end at
 	 * @return The total sum of all integers from min to max.
 	 */
-	private int RangeSumInclusive(int min, int max) {
+	private int rangeSumInclusive(int min, int max) {
 		int result = 0;
 		_lastExecutionSteps++;
 

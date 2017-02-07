@@ -1,6 +1,7 @@
 package tests;
 import static org.junit.Assert.*;
 import org.junit.Test;
+import EulerProblems.*;
 
 /**
  * Euler problem unit tests for validating and debugging
@@ -16,7 +17,23 @@ import org.junit.Test;
 public class EulerProblemTests {
 	
 	@Test
-	public void ProblemOneShouldInitialize() {
-		IEulerProblem p1 = new ProblemOne();
+	public void problemOneShouldInitialize() {
+		EulerProblem p1 = new ProblemOne();
+		
+		assertEquals(0, p1.solve());
+	}
+	
+	@Test
+	public void problemOneShouldSolveSmallProblemCorrectly() {
+		EulerProblem p1 = new ProblemOne(10, new int[] {3, 5});
+		assertEquals(23, p1.solve());
+		assertTrue(p1.getLastExecutionSteps() > 0);
+		assertTrue(p1.getLastExecutionRuntime().length() > 0);
+	}
+	
+	@Test
+	public void problemOneShouldSolveProblemWithCommonFactors() {
+		EulerProblem p1 = new ProblemOne(16, new int[] {3,5});
+		assertEquals(60, p1.solve());
 	}
 }

@@ -8,9 +8,11 @@ public class MyTestRunner {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Result result = JUnitCore.runClasses(EulerProblemTests.class);
-	    for (Failure failure : result.getFailures()) {
-	      System.out.println(failure.toString());
+		for (Failure failure : result.getFailures()) {
+	      System.out.println(failure.toString());  
 	    }
+		
+		System.out.println("All tests ran!");
 	}
 
 }

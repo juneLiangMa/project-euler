@@ -1,3 +1,4 @@
+package EulerProblems;
 import sun.management.counter.Variability;
 
 /**
@@ -8,16 +9,17 @@ import sun.management.counter.Variability;
  * @version 1.0
  * @since 2017/02/06
  */
+
 public class EulerProblemSolverMain {
 
 	public static void main(String[] args) {
-		IEulerProblem problem = new ProblemOne(1000, new int[] {3, 5});
-		int result = problem.Solve();
+		EulerProblem problem = new ProblemOne(1000, new int[] {3, 5});
+		int result = problem.solve();
 		
 		System.out.println(String.format("Problem %s returned a result value of %s.",
-				problem.GetName(), result));
+				problem.getName(), result));
 		System.out.println(String.format("Problem executed %s steps and ran for %s time.",
-				problem.GetLastExecutionSteps(), problem.GetLastExecutionRuntime()));
+				problem.getLastExecutionSteps(), problem.getLastExecutionRuntime()));
 	}
 
 }

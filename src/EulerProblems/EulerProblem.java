@@ -1,3 +1,4 @@
+package EulerProblems;
 /**
  * The IEulerProblem interface defines the basic
  * skeleton for all euler problem solutions.
@@ -6,10 +7,10 @@
  * @version 1.0
  * @since 2017/02/06
  */
-public interface IEulerProblem {
-	String GetName();
-	int GetLastExecutionSteps();
-	String GetLastExecutionRuntime();
-	int Solve();
+public interface EulerProblem {
+	String getName();
+	int getLastExecutionSteps();
+	String getLastExecutionRuntime();
+	int solve();
 	
 }
