@@ -15,6 +15,9 @@ import EulerProblems.*;
  * @since 2017/02/06
  */
 public class EulerProblemTests {
+	/**
+	 * SECTION - problem 1
+	 */
 	@Test
 	public void problemOneShouldSolveSmallProblemCorrectly() {
 		EulerProblem p1 = new ProblemOne(10, 3, 5);
@@ -34,5 +37,29 @@ public class EulerProblemTests {
 		EulerProblem p1 = new ProblemOne(10, 2, 2);
 		
 		assertEquals(20, p1.solve());
+	}
+
+	/**
+	 * SECTION - problem 2 tests
+	 */
+	@Test
+	public void ProblemTwoShouldSolveSmallProblem() {
+		EulerProblem p2 = new ProblemTwo(10);
+		assertEquals(10, p2.solve());
+	}
+	
+	@Test
+	public void ProblemTwoShouldSolveInvalidProblem() {
+		EulerProblem p2 = new ProblemTwo(0);
+		assertEquals(0, p2.solve());
+		
+		p2 = new ProblemTwo(-3);
+		assertEquals(0, p2.solve());
+	}
+	
+	@Test
+	public void ProblemTwoShouldSolveIntermediateProblem() {
+		EulerProblem p2 = new ProblemTwo(150);
+		assertEquals(188, p2.solve());
 	}
 }

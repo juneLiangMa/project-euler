@@ -24,39 +24,17 @@ public class EulerProblemSolverMain {
 	}
 	
 	public static void main(String[] args) {
-		printPreamble();
-		
-		String inputLine = System.console().readLine();
-		
-		while(isNotExitCommand(inputLine)) {
-			switch (getCommandType(inputLine)) {
-			case HELP:
-				
-				break;
-			case LOAD:
-				checkAndRunSolutionIfExists(inputLine);
-				break;
-			case LIST:
-				break;
-			case INFO:
-				break;
-			default:
-				break;
-			}
-		}
-	}
-
-	private static void checkAndRunSolutionIfExists(String inputLine) {
-		// TODO Auto-generated method stub
-		/*
-		 * EulerProblem problem = new ProblemOne(1000, 3, 5);
-		int result = problem.solve();
+		EulerProblem problem = new ProblemTwo(4000000);
+			int result = problem.solve();
 		
 		System.out.println(String.format("Problem %s returned a result value of %s.",
 				problem.getName(), result));
 		System.out.println(String.format("Problem executed %s steps and ran for %s time.",
 				problem.getLastExecutionSteps(), problem.getLastExecutionRuntime()));
-		 * */
+	}
+
+	private static void checkAndRunSolutionIfExists(String inputLine) {
+		// TODO Auto-generated method stub
 	}
 
 	private static CommandTypes getCommandType(String inputLine) {
