@@ -5,7 +5,7 @@ import java.util.concurrent.*;
 
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import sun.management.counter.Variability;
-
+import EulerProblems.ProblemBase;
 import java.math.*;
 
 /**
@@ -18,11 +18,9 @@ import java.math.*;
  * @version 1.0
  * @since 2017/02/06
  */
-public class ProblemOne implements EulerProblem {
+public class ProblemOne extends ProblemBase {
 	private int _limit;
-	private int _lastExecutionSteps;
 	private int _preambleSteps;
-	private String _lastExecutionRuntime;
 	private int _factorSmaller;
 	private int _factorLarger;
 	
@@ -30,24 +28,6 @@ public class ProblemOne implements EulerProblem {
 		return "Problem One - factor sums";
 	}
 	
-	public int getLastExecutionSteps() {
-		return _lastExecutionSteps;
-	}
-	
-	public String getLastExecutionRuntime() {
-		return _lastExecutionRuntime;
-	}
-	
-	private void setLastExecutionRuntime(long millis) {
-		long min = TimeUnit.MILLISECONDS.toMinutes(millis);
-		long sec = TimeUnit.MILLISECONDS.toSeconds(millis) - 
-			    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis));
-		
-		long ms = millis - TimeUnit.MINUTES.toMillis(min) - TimeUnit.SECONDS.toMillis(sec);
-		
-		_lastExecutionRuntime = String.format("%02d min, %02d sec, %02d ms", 
-			    min, sec, ms);
-	}
 	
 	/**
 	 * Constructor which initializes the max limit, exclusive

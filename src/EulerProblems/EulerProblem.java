@@ -1,4 +1,7 @@
 package EulerProblems;
+
+import java.util.concurrent.TimeUnit;
+
 /**
  * The IEulerProblem interface defines the basic
  * skeleton for all euler problem solutions.
@@ -11,6 +14,6 @@ public interface EulerProblem {
 	String getName();
 	int getLastExecutionSteps();
 	String getLastExecutionRuntime();
-	int solve();
-	
+	int solve();	
 }
+

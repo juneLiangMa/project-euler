@@ -1,4 +1,7 @@
 package EulerProblems;
+import com.sun.java_cup.internal.runtime.Scanner;
+import com.sun.org.apache.xml.internal.serializer.utils.SystemIDResolver;
+
 import sun.management.counter.Variability;
 
 /**
@@ -12,14 +15,66 @@ import sun.management.counter.Variability;
 
 public class EulerProblemSolverMain {
 
+	public enum CommandTypes {
+		HELP,
+		LOAD,
+		LIST,
+		INFO,
+		UNKNOWN
+	}
+	
 	public static void main(String[] args) {
-		EulerProblem problem = new ProblemOne(1000, 3, 5);
+		printPreamble();
+		
+		String inputLine = System.console().readLine();
+		
+		while(isNotExitCommand(inputLine)) {
+			switch (getCommandType(inputLine)) {
+			case HELP:
+				
+				break;
+			case LOAD:
+				checkAndRunSolutionIfExists(inputLine);
+				break;
+			case LIST:
+				break;
+			case INFO:
+				break;
+			default:
+				break;
+			}
+		}
+	}
+
+	private static void checkAndRunSolutionIfExists(String inputLine) {
+		// TODO Auto-generated method stub
+		/*
+		 * EulerProblem problem = new ProblemOne(1000, 3, 5);
 		int result = problem.solve();
 		
 		System.out.println(String.format("Problem %s returned a result value of %s.",
 				problem.getName(), result));
 		System.out.println(String.format("Problem executed %s steps and ran for %s time.",
 				problem.getLastExecutionSteps(), problem.getLastExecutionRuntime()));
+		 * */
+	}
+
+	private static CommandTypes getCommandType(String inputLine) {
+		CommandTypes result = CommandTypes.UNKNOWN;
+		
+		return result;
+	}
+
+	private static boolean isNotExitCommand(String inputLine) {
+		return inputLine.toLowerCase().contains("exit") ||
+				inputLine.toLowerCase().contains("quit");
+	}
+
+	private static void printPreamble() {
+		System.out.println("Welcome to June's Euler problem solver.");
+		System.out.println("Type 'help' to see a list of commands,");
+		System.out.println("or type a number to run the solution for problem n from");
+		System.out.println("the Euler Problems list, if the solution exists.");
 	}
 
 }
