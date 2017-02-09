@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.concurrent.*;
 
 import javafx.beans.property.ReadOnlyBooleanProperty;
+import sun.management.counter.Variability;
 
 import java.math.*;
 
@@ -19,9 +20,11 @@ import java.math.*;
  */
 public class ProblemOne implements EulerProblem {
 	private int _limit;
-	private ArrayList<Integer> _factorsList;
 	private int _lastExecutionSteps;
+	private int _preambleSteps;
 	private String _lastExecutionRuntime;
+	private int _factorSmaller;
+	private int _factorLarger;
 	
 	public String getName() {
 		return "Problem One - factor sums";
@@ -47,26 +50,29 @@ public class ProblemOne implements EulerProblem {
 	}
 	
 	/**
-	 * Empty constructor
-	 */
-	public ProblemOne() {
-		_lastExecutionRuntime = "";
-		_lastExecutionSteps = -1;
-		_factorsList = new ArrayList<Integer>();
-	}
-	
-	/**
-	 * Constructor which initializes the max limit
+	 * Constructor which initializes the max limit, exclusive
 	 * and the single-digit factors to be used
-	 * @param limit
+	 * @param limitExclusive
 	 * @param factors
 	 */
-	public ProblemOne(int limit, int[] factors) {
-		this();
-		_limit = limit;
-		for (int f : factors) {
-			if(0 < f && f < 10)
-				_factorsList.add(f);
+	public ProblemOne(int limitExclusive, int factor1, int factor2) {
+		_preambleSteps = 0;
+		
+		_limit = limitExclusive - 1;
+		_preambleSteps++;
+
+		_factorSmaller = factor1;
+		_preambleSteps++;
+		
+		_factorLarger = factor2;
+		_preambleSteps++;
+
+		_preambleSteps += 2;
+		if((_limit / factor2) < (_limit / factor1)) {
+			_factorLarger = factor1;
+			_preambleSteps++;
+			_factorSmaller = factor2;
+			_preambleSteps++;
 		}
 	}
 	
@@ -76,24 +82,41 @@ public class ProblemOne implements EulerProblem {
 	 * the limit value.
 	 */
 	public int solve() {
-		_lastExecutionSteps = 0;
+		_lastExecutionSteps = _preambleSteps;
 
 		 long startTime = System.currentTimeMillis();
 		
 		int result = 0;
 		_lastExecutionSteps++;
-		for(int factor : _factorsList) {
-			// get the max number of times the factor goes in to the max
-			int maxCount = (_limit - 1) / factor;
+			
+		// get the max number of times the factor goes in to the max
+		int maxCount = _limit / _factorLarger;
+		_lastExecutionSteps++;
+
+		int multiplier = rangeSumInclusive(1, maxCount);
+		_lastExecutionSteps++;
+
+		result += (multiplier * _factorLarger);
+		_lastExecutionSteps += 2;
+		
+		maxCount = _limit / _factorSmaller;
+		_lastExecutionSteps++;
+
+		for(int i = 1; i <= maxCount; i++) {
 			_lastExecutionSteps++;
 
-			int multiplier = rangeSumInclusive(1, maxCount);
-			result += (multiplier * factor);
+			int tempValue = i * _factorSmaller;
 			_lastExecutionSteps++;
+
+			_lastExecutionSteps++;
+			if(tempValue % _factorLarger != 0) {
+				result += tempValue;
+				_lastExecutionSteps++;
+			}
 		}
 		
-		 long endTime = System.currentTimeMillis();
-		 setLastExecutionRuntime(endTime - startTime);
+		long endTime = System.currentTimeMillis();
+		setLastExecutionRuntime(endTime - startTime);
 		return result;
 	}
 	

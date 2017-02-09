@@ -13,7 +13,7 @@ import sun.management.counter.Variability;
 public class EulerProblemSolverMain {
 
 	public static void main(String[] args) {
-		EulerProblem problem = new ProblemOne(1000, new int[] {3, 5});
+		EulerProblem problem = new ProblemOne(1000, 3, 5);
 		int result = problem.solve();
 		
 		System.out.println(String.format("Problem %s returned a result value of %s.",

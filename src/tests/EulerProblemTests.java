@@ -15,17 +15,9 @@ import EulerProblems.*;
  * @since 2017/02/06
  */
 public class EulerProblemTests {
-	
-	@Test
-	public void problemOneShouldInitialize() {
-		EulerProblem p1 = new ProblemOne();
-		
-		assertEquals(0, p1.solve());
-	}
-	
 	@Test
 	public void problemOneShouldSolveSmallProblemCorrectly() {
-		EulerProblem p1 = new ProblemOne(10, new int[] {3, 5});
+		EulerProblem p1 = new ProblemOne(10, 3, 5);
 		assertEquals(23, p1.solve());
 		assertTrue(p1.getLastExecutionSteps() > 0);
 		assertTrue(p1.getLastExecutionRuntime().length() > 0);
@@ -33,7 +25,14 @@ public class EulerProblemTests {
 	
 	@Test
 	public void problemOneShouldSolveProblemWithCommonFactors() {
-		EulerProblem p1 = new ProblemOne(16, new int[] {3,5});
+		EulerProblem p1 = new ProblemOne(16, 3, 5);
 		assertEquals(60, p1.solve());
+	}
+	
+	@Test
+	public void ProblemOneShouldSolveProblemWithSameValues() {
+		EulerProblem p1 = new ProblemOne(10, 2, 2);
+		
+		assertEquals(20, p1.solve());
 	}
 }
